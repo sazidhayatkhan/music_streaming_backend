@@ -17,6 +17,10 @@ var database = Environment.GetEnvironmentVariable("DB_NAME");
 var username = Environment.GetEnvironmentVariable("DB_USERNAME");
 var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
+var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
+var issuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
+var audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
+
 builder.Services.AddScoped<AuthFactory>();
 
 builder.Services.AddScoped<EmailAuthProvider>();
