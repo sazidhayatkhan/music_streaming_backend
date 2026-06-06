@@ -47,4 +47,9 @@ public class GoogleAuthProvider : IAuthProvider
 
         return _jwt.GenerateToken(user);
     }
+
+    public Task<string?> RegisterAsync(object request)
+    {
+        throw new NotImplementedException("Google does not support manual registration");
+    }
 }

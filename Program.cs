@@ -1,6 +1,7 @@
 using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 using MusicStreaming.Api.Data;
+using MusicStreaming.Api.Services;
 
 Env.Load();
 
@@ -16,6 +17,13 @@ var database = Environment.GetEnvironmentVariable("DB_NAME");
 var username = Environment.GetEnvironmentVariable("DB_USERNAME");
 var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
+builder.Services.AddScoped<AuthFactory>();
+
+builder.Services.AddScoped<EmailAuthProvider>();
+builder.Services.AddScoped<GoogleAuthProvider>();
+
+builder.Services.AddScoped<JwtService>();
+
 var connectionString =
     $"Host={host};Port={port};Database={database};Username={username};Password={password}";
 
@@ -26,6 +34,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseNpgsql(connectionString);
 });
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

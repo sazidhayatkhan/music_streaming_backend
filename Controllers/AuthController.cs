@@ -29,4 +29,17 @@ public class AuthController : ControllerBase
 
         return token == null ? Unauthorized() : Ok(new { token });
     }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register(RegisterDto dto)
+    {
+        var provider = _factory.Create("email");
+
+        var token = await provider.RegisterAsync(dto);
+
+        if (token == null)
+            return BadRequest("User already exists or invalid data");
+
+        return Ok(new { token });
+    }
 }
